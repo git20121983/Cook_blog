@@ -10,7 +10,7 @@
                     <div class="row">
                         <div class="col-lg-8 col-md-8">
                             <div class="breadcrumb__text">
-                                <h2>Categories: <span>Recipes</span></h2>
+                                <h2>Categories: <span>{{post_list.first.category.name}}</span></h2>
                                 <div class="breadcrumb__option">
                                     <a href="#">Home</a>
                                     <span>Recipes</span>
@@ -18,28 +18,28 @@
                             </div>
                             <div class="row">
                                 <div class="col-lg-6 col-md-6 col-sm-6">
+                                    {% for post in post_list %}
                                     <div class="categories__post__item">
                                         <div class="categories__post__item__pic smaller__large set-bg"
-                                            data-setbg="img/categories/categories-post/cp-3.jpg">
+                                            data-setbg="{{post.image.url}}">
                                             <div class="post__meta">
-                                                <h4>08</h4>
-                                                <span>Aug</span>
+                                                <h4>{{post.create_at|date:"d"}}</h4>
+                                                <span>{{post.create_at|date:"M"}}</span>
                                             </div>
                                         </div>
                                         <div class="categories__post__item__text">
-                                            <span class="post__label">Dinner</span>
-                                            <h3><a href="#">17 Perfect Gifts for Your Vegan Friend Because
-                                                    Sometimes...</a></h3>
+                                            <span class="post__label">{{post.category}}</span>
+                                            <h3><a href="{{post.get_absolute_url}}">{{post.title}}</a></h3>
                                             <ul class="post__widget">
-                                                <li>by <span>Admin</span></li>
+                                                <li>by <span>{{post.author}}</span></li>
                                                 <li>3 min read</li>
-                                                <li>20 Comment</li>
+                                                <li>{{post.comments_count}}
+                                                </li>
                                             </ul>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                                tempor incididunt dolore magna aliqua. Quis ipsum suspendisse ultrices
-                                                gravida...</p>
+                                            <p>{{post.text|slice:":200" }}</p>
                                         </div>
                                     </div>
+                                    {% endfor %}
                                     <div class="categories__post__item__small">
                                         <img src="img/categories/categories-post/quote.png" alt="">
                                         <p>Lorem ipsum dolor amet, consectetur adipiscing elit, sed do eiusmod tempor
